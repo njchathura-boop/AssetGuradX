@@ -1,0 +1,30 @@
+# These are the market sensors used later to reconstruct hourly market prices.
+# Raw extraction stores events/state; market-price construction happens after the raw archive is frozen.
+market_sources:
+  USDC:
+    - {contract_key: uniswap_v3_usdc_weth_005, quote: WETH, priority: 1}
+    - {contract_key: curve_3pool, quote: USD_STABLE_BASKET, priority: 2}
+  USDT:
+    - {contract_key: curve_3pool, quote: USD_STABLE_BASKET, priority: 1}
+  DAI:
+    - {contract_key: curve_3pool, quote: USD_STABLE_BASKET, priority: 1}
+  FRAX:
+    - {contract_key: curve_frax_usdc, quote: USDC, priority: 1}
+  LUSD:
+    - {contract_key: curve_lusd_3crv, quote: THREE_CRV_OR_UNDERLYING_STABLES, priority: 1}
+  stETH:
+    - {contract_key: curve_steth_eth, quote: ETH, priority: 1}
+  wstETH:
+    - {contract_key: uniswap_v3_wsteth_weth_001, quote: WETH, priority: 1}
+  WBTC:
+    - {contract_key: uniswap_v3_wbtc_weth_030, quote: WETH, priority: 1}
+
+reference_sources:
+  USDC: {kind: constant_usd, value: 1.0}
+  USDT: {kind: constant_usd, value: 1.0}
+  DAI:  {kind: constant_usd, value: 1.0}
+  FRAX: {kind: constant_usd, value: 1.0}
+  LUSD: {kind: constant_usd, value: 1.0}
+  stETH: {kind: lido_steth_share_rate_times_eth_usd}
+  wstETH: {kind: lido_wsteth_ratio_times_steth_reference}
+  WBTC: {kind: chainlink_btc_usd}

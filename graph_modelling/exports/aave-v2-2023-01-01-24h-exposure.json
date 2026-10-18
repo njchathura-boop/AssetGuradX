@@ -1,0 +1,134 @@
+{
+  "database_verified": true,
+  "query_version": "agx_records_v1",
+  "release_provenance": "REAL processed Aave V2 historical RPC sample; processed/aave_reserve_state_hourly/year=2023/month=01/aave_reserve_state_hourly_2023-01.parquet; sha256=d288932450fb0a689eec24fab6565e519ff31914b2665dcd0c8b715634c2f59d; reserve cash only; not a validated stress graph",
+  "snapshot": {
+    "age_seconds": [
+      0,
+      0,
+      0
+    ],
+    "edge_index": [
+      [
+        0,
+        3
+      ],
+      [
+        1,
+        4
+      ],
+      [
+        2,
+        5
+      ]
+    ],
+    "freshness_mask": [
+      true,
+      true,
+      true
+    ],
+    "nodes": [
+      {
+        "entity_id": "DAI",
+        "kind": "asset",
+        "name": "DAI"
+      },
+      {
+        "entity_id": "USDC",
+        "kind": "asset",
+        "name": "USDC"
+      },
+      {
+        "entity_id": "WBTC",
+        "kind": "asset",
+        "name": "WBTC"
+      },
+      {
+        "entity_id": "aave_v2_DAI",
+        "kind": "lending_market",
+        "name": "Aave V2 DAI reserve"
+      },
+      {
+        "entity_id": "aave_v2_USDC",
+        "kind": "lending_market",
+        "name": "Aave V2 USDC reserve"
+      },
+      {
+        "entity_id": "aave_v2_WBTC",
+        "kind": "lending_market",
+        "name": "Aave V2 WBTC reserve"
+      }
+    ],
+    "records": [
+      {
+        "amount": "78787753.609254955733751101",
+        "available_at": "2023-01-01T23:59:59+00:00",
+        "evidence": [
+          "parquet:processed/aave_reserve_state_hourly/year=2023/month=01/aave_reserve_state_hourly_2023-01.parquet#sha256=d288932450fb0a689eec24fab6565e519ff31914b2665dcd0c8b715634c2f59d",
+          "ethereum:block=16315361",
+          "underlying:0x6b175474e89094c44da98b954eedeac495271d0f"
+        ],
+        "meaning": "Aave V2 reserve cash available at its aToken contract; not account exposure or USD loss",
+        "method": "historical_rpc_erc20_balance_of_a_token",
+        "observed_at": "2023-01-01T23:59:59+00:00",
+        "quality": "valid",
+        "relation": "reserve_available_liquidity",
+        "source": "DAI",
+        "status": "observed",
+        "target": "aave_v2_DAI",
+        "unit": "DAI",
+        "valid_until": "2023-01-02T00:59:59+00:00",
+        "valuation_at": "2023-01-01T23:59:59+00:00",
+        "view": "exposure"
+      },
+      {
+        "amount": "427713075.840579",
+        "available_at": "2023-01-01T23:59:59+00:00",
+        "evidence": [
+          "parquet:processed/aave_reserve_state_hourly/year=2023/month=01/aave_reserve_state_hourly_2023-01.parquet#sha256=d288932450fb0a689eec24fab6565e519ff31914b2665dcd0c8b715634c2f59d",
+          "ethereum:block=16315361",
+          "underlying:0xa0b86991c6218b36c1d19d4a2e9eb0ce3606eb48"
+        ],
+        "meaning": "Aave V2 reserve cash available at its aToken contract; not account exposure or USD loss",
+        "method": "historical_rpc_erc20_balance_of_a_token",
+        "observed_at": "2023-01-01T23:59:59+00:00",
+        "quality": "valid",
+        "relation": "reserve_available_liquidity",
+        "source": "USDC",
+        "status": "observed",
+        "target": "aave_v2_USDC",
+        "unit": "USDC",
+        "valid_until": "2023-01-02T00:59:59+00:00",
+        "valuation_at": "2023-01-01T23:59:59+00:00",
+        "view": "exposure"
+      },
+      {
+        "amount": "27068.59063795",
+        "available_at": "2023-01-01T23:59:59+00:00",
+        "evidence": [
+          "parquet:processed/aave_reserve_state_hourly/year=2023/month=01/aave_reserve_state_hourly_2023-01.parquet#sha256=d288932450fb0a689eec24fab6565e519ff31914b2665dcd0c8b715634c2f59d",
+          "ethereum:block=16315361",
+          "underlying:0x2260fac5e5542a773aa44fbcfedf7c193bc2c599"
+        ],
+        "meaning": "Aave V2 reserve cash available at its aToken contract; not account exposure or USD loss",
+        "method": "historical_rpc_erc20_balance_of_a_token",
+        "observed_at": "2023-01-01T23:59:59+00:00",
+        "quality": "valid",
+        "relation": "reserve_available_liquidity",
+        "source": "WBTC",
+        "status": "observed",
+        "target": "aave_v2_WBTC",
+        "unit": "WBTC",
+        "valid_until": "2023-01-02T00:59:59+00:00",
+        "valuation_at": "2023-01-01T23:59:59+00:00",
+        "view": "exposure"
+      }
+    ],
+    "release_hash": "109ffa6be264885643a0666b6ab2e2c3317d51fe7321812687b7c0db210b38d9",
+    "release_id": "real-aave-v2-sample-20230101-24h-dai-usdc-wbtc-d288932450fb",
+    "schema_version": "assetguardx-temporal-graph/v1",
+    "timestamp": "2023-01-01T23:59:59+00:00",
+    "view": "exposure"
+  },
+  "snapshot_hash": "d89eb4dbbd240a7bc2b5454e46959481306b0fa80508bd014234e187953e12ed"
+}

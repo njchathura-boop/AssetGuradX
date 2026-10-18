@@ -1,0 +1,21 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "assetguardx-graph-modelling"
+version = "0.1.0"
+description = "Temporal graph release construction and TigerGraph integration for AssetGuard-X"
+requires-python = ">=3.11"
+dependencies = ["pyarrow>=15,<25", "pandas>=2.2,<3", "PyYAML>=6,<7"]
+
+[project.optional-dependencies]
+dev = ["pytest>=8,<9"]
+
+[tool.setuptools.packages.find]
+include = ["assetguardx_graph*"]
+
+[tool.pytest.ini_options]
+pythonpath = ["."]
+testpaths = ["tests"]
+addopts = "-q -p no:cacheprovider"

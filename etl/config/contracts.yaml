@@ -1,0 +1,363 @@
+assets:
+  ETH:
+    address: '0xeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee'
+    decimals: 18
+    target_asset: false
+    native: true
+    family: support
+  WETH:
+    address: '0xc02aaa39b223fe8d0a0e5c4f27ead9083c756cc2'
+    decimals: 18
+    target_asset: false
+  USDC:
+    address: '0xa0b86991c6218b36c1d19d4a2e9eb0ce3606eb48'
+    decimals: 6
+    target_asset: true
+    family: stablecoin
+  USDT:
+    address: '0xdac17f958d2ee523a2206206994597c13d831ec7'
+    decimals: 6
+    target_asset: true
+    family: stablecoin
+  DAI:
+    address: '0x6b175474e89094c44da98b954eedeac495271d0f'
+    decimals: 18
+    target_asset: true
+    family: stablecoin
+  FRAX:
+    address: '0x853d955acef822db058eb8505911ed77f175b99e'
+    decimals: 18
+    target_asset: true
+    family: stablecoin
+  LUSD:
+    address: '0x5f98805a4e8be255a32880fdec7f6728c6568ba0'
+    decimals: 18
+    target_asset: true
+    family: stablecoin
+  stETH:
+    address: '0xae7ab96520de3a18e5e111b5eaab095312d7fe84'
+    decimals: 18
+    target_asset: true
+    family: lst
+  wstETH:
+    address: '0x7f39c581f595b53c5cb19bd0b3f8da6c935e2ca0'
+    decimals: 18
+    target_asset: true
+    family: lst
+  WBTC:
+    address: '0x2260fac5e5542a773aa44fbcfedf7c193bc2c599'
+    decimals: 8
+    target_asset: true
+    family: wrapped
+  3CRV:
+    address: '0x6c3f90f043a72fa612cbac8115ee7e52bde6e490'
+    decimals: 18
+    target_asset: false
+contracts:
+  uniswap_v3_usdc_weth_005:
+    protocol: uniswap_v3
+    role: dex_pool
+    address: '0x88e6a0c2ddd26feeb64f039a2c41296fcb3f5640'
+    state_kind: uniswap_v3_pool
+    token0: USDC
+    token1: WETH
+    fee: 500
+    source: Uniswap V3 verified USDC/WETH 0.05% pool
+    decoded_event_signatures:
+    - Swap(address,address,int256,int256,uint160,uint128,int24)
+    - Mint(address,address,int24,int24,uint128,uint256,uint256)
+    - Burn(address,int24,int24,uint128,uint256,uint256)
+    - Flash(address,address,uint256,uint256,uint256,uint256)
+  uniswap_v3_wbtc_weth_030:
+    protocol: uniswap_v3
+    role: dex_pool
+    address: '0xcbcdf9626bc03e24f779434178a73a0b4bad62ed'
+    state_kind: uniswap_v3_pool
+    token0: WBTC
+    token1: WETH
+    fee: 3000
+    source: Uniswap V3 WBTC/WETH 0.30% pool
+    decoded_event_signatures:
+    - Swap(address,address,int256,int256,uint160,uint128,int24)
+    - Mint(address,address,int24,int24,uint128,uint256,uint256)
+    - Burn(address,int24,int24,uint128,uint256,uint256)
+    - Flash(address,address,uint256,uint256,uint256,uint256)
+  uniswap_v3_wsteth_weth_001:
+    protocol: uniswap_v3
+    role: dex_pool
+    address: '0x109830a1aaad605bbf02a9dfa7b0b92ec2fb7daa'
+    state_kind: uniswap_v3_pool
+    token0: wstETH
+    token1: WETH
+    fee: 100
+    source: Uniswap V3 wstETH/WETH 0.01% pool; verified on-chain by verify_contracts.py before extraction
+    decoded_event_signatures:
+    - Swap(address,address,int256,int256,uint160,uint128,int24)
+    - Mint(address,address,int24,int24,uint128,uint256,uint256)
+    - Burn(address,int24,int24,uint128,uint256,uint256)
+    - Flash(address,address,uint256,uint256,uint256,uint256)
+  curve_3pool:
+    protocol: curve
+    role: dex_pool
+    address: '0xbebc44782c7db0a1a60cb6fe97d0b483032ff1c7'
+    state_kind: curve_pool
+    coins:
+    - symbol: DAI
+      decimals: 18
+      address: '0x6b175474e89094c44da98b954eedeac495271d0f'
+    - symbol: USDC
+      decimals: 6
+      address: '0xa0b86991c6218b36c1d19d4a2e9eb0ce3606eb48'
+    - symbol: USDT
+      decimals: 6
+      address: '0xdac17f958d2ee523a2206206994597c13d831ec7'
+    source: Curve 3pool
+    decoded_event_signatures:
+    - TokenExchange(address,int128,uint256,int128,uint256)
+    - AddLiquidity(address,uint256[3],uint256[3],uint256,uint256)
+    - RemoveLiquidity(address,uint256[3],uint256[3],uint256)
+    - RemoveLiquidityOne(address,uint256,uint256)
+    - RemoveLiquidityImbalance(address,uint256[3],uint256[3],uint256,uint256)
+    - RampA(uint256,uint256,uint256,uint256)
+    - StopRampA(uint256,uint256)
+    - NewFee(uint256,uint256)
+    underlying_coins:
+    - symbol: DAI
+      decimals: 18
+      address: '0x6b175474e89094c44da98b954eedeac495271d0f'
+    - symbol: USDC
+      decimals: 6
+      address: '0xa0b86991c6218b36c1d19d4a2e9eb0ce3606eb48'
+    - symbol: USDT
+      decimals: 6
+      address: '0xdac17f958d2ee523a2206206994597c13d831ec7'
+    market_quotes:
+    - target: DAI
+      quote: USDC
+      method: get_dy
+      target_index: 0
+      quote_index: 1
+    - target: USDT
+      quote: USDC
+      method: get_dy
+      target_index: 2
+      quote_index: 1
+  curve_steth_eth:
+    protocol: curve
+    role: dex_pool
+    address: '0xdc24316b9ae028f1497c275eb9192a3ea0f67022'
+    state_kind: curve_pool
+    coins:
+    - symbol: ETH
+      decimals: 18
+      address: '0xeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee'
+    - symbol: stETH
+      decimals: 18
+      address: '0xae7ab96520de3a18e5e111b5eaab095312d7fe84'
+    source: Curve stETH/ETH pool
+    decoded_event_signatures:
+    - TokenExchange(address,int128,uint256,int128,uint256)
+    - AddLiquidity(address,uint256[2],uint256[2],uint256,uint256)
+    - RemoveLiquidity(address,uint256[2],uint256[2],uint256)
+    - RemoveLiquidityOne(address,uint256,uint256)
+    - RemoveLiquidityImbalance(address,uint256[2],uint256[2],uint256,uint256)
+    - RampA(uint256,uint256,uint256,uint256)
+    - StopRampA(uint256,uint256)
+    - NewFee(uint256,uint256)
+    underlying_coins:
+    - symbol: ETH
+      decimals: 18
+      address: '0xeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee'
+    - symbol: stETH
+      decimals: 18
+      address: '0xae7ab96520de3a18e5e111b5eaab095312d7fe84'
+    market_quotes:
+    - target: stETH
+      quote: ETH
+      method: get_dy
+      target_index: 1
+      quote_index: 0
+  curve_frax_usdc:
+    protocol: curve
+    role: dex_pool
+    address: '0xdcef968d416a41cdac0ed8702fac8128a64241a2'
+    state_kind: curve_pool
+    coins:
+    - symbol: FRAX
+      decimals: 18
+      address: '0x853d955acef822db058eb8505911ed77f175b99e'
+    - symbol: USDC
+      decimals: 6
+      address: '0xa0b86991c6218b36c1d19d4a2e9eb0ce3606eb48'
+    source: Curve FRAX/USDC pool
+    decoded_event_signatures:
+    - TokenExchange(address,int128,uint256,int128,uint256)
+    - AddLiquidity(address,uint256[2],uint256[2],uint256,uint256)
+    - RemoveLiquidity(address,uint256[2],uint256[2],uint256)
+    - RemoveLiquidityOne(address,uint256,uint256,uint256)
+    - RemoveLiquidityImbalance(address,uint256[2],uint256[2],uint256,uint256)
+    - RampA(uint256,uint256,uint256,uint256)
+    - StopRampA(uint256,uint256)
+    - NewFee(uint256,uint256)
+    underlying_coins:
+    - symbol: FRAX
+      decimals: 18
+      address: '0x853d955acef822db058eb8505911ed77f175b99e'
+    - symbol: USDC
+      decimals: 6
+      address: '0xa0b86991c6218b36c1d19d4a2e9eb0ce3606eb48'
+    market_quotes:
+    - target: FRAX
+      quote: USDC
+      method: get_dy
+      target_index: 0
+      quote_index: 1
+  curve_lusd_3crv:
+    protocol: curve
+    role: dex_pool
+    address: '0xed279fdd11ca84beef15af5d39bb4d4bee23f0ca'
+    state_kind: curve_pool
+    is_meta_pool: true
+    base_pool: curve_3pool
+    coins:
+    - symbol: LUSD
+      decimals: 18
+      address: '0x5f98805a4e8be255a32880fdec7f6728c6568ba0'
+    - symbol: 3CRV
+      decimals: 18
+      address: '0x6c3f90f043a72fa612cbac8115ee7e52bde6e490'
+    source: Curve LUSD/3CRV metapool
+    decoded_event_signatures:
+    - TokenExchange(address,int128,uint256,int128,uint256)
+    - TokenExchangeUnderlying(address,int128,uint256,int128,uint256)
+    - AddLiquidity(address,uint256[2],uint256[2],uint256,uint256)
+    - RemoveLiquidity(address,uint256[2],uint256[2],uint256)
+    - RemoveLiquidityOne(address,uint256,uint256,uint256)
+    - RemoveLiquidityImbalance(address,uint256[2],uint256[2],uint256,uint256)
+    - RampA(uint256,uint256,uint256,uint256)
+    - StopRampA(uint256,uint256)
+    - NewFee(uint256,uint256)
+    underlying_coins:
+    - symbol: LUSD
+      decimals: 18
+      address: '0x5f98805a4e8be255a32880fdec7f6728c6568ba0'
+    - symbol: DAI
+      decimals: 18
+      address: '0x6b175474e89094c44da98b954eedeac495271d0f'
+    - symbol: USDC
+      decimals: 6
+      address: '0xa0b86991c6218b36c1d19d4a2e9eb0ce3606eb48'
+    - symbol: USDT
+      decimals: 6
+      address: '0xdac17f958d2ee523a2206206994597c13d831ec7'
+    market_quotes:
+    - target: LUSD
+      quote: USDC
+      method: get_dy_underlying
+      target_index: 0
+      quote_index: 2
+  aave_v2_lending_pool:
+    protocol: aave_v2
+    role: lending_pool
+    address: '0x7d2768de32b0b80b7a3454c06bdac94a69ddc7a9'
+    source: Aave V2 Ethereum LendingPool
+    decoded_event_signatures:
+    - Deposit(address,address,address,uint256,uint16)
+    - Withdraw(address,address,address,uint256)
+    - Borrow(address,address,address,uint256,uint256,uint256,uint16)
+    - Repay(address,address,address,uint256)
+    - LiquidationCall(address,address,address,uint256,uint256,address,bool)
+    - ReserveDataUpdated(address,uint256,uint256,uint256,uint256,uint256)
+    - ReserveUsedAsCollateralEnabled(address,address)
+    - ReserveUsedAsCollateralDisabled(address,address)
+    - Swap(address,address,uint256)
+    - RebalanceStableBorrowRate(address,address)
+    - FlashLoan(address,address,address,uint256,uint256,uint16)
+  aave_v2_data_provider:
+    protocol: aave_v2
+    role: data_provider
+    address: '0x057835ad21a177dbdd3090bb1cae03eacf78fc6d'
+    state_kind: aave_v2_data_provider
+    lending_pool: '0x7d2768de32b0b80b7a3454c06bdac94a69ddc7a9'
+    reserves:
+    - symbol: DAI
+      address: '0x6b175474e89094c44da98b954eedeac495271d0f'
+      decimals: 18
+    - symbol: USDC
+      address: '0xa0b86991c6218b36c1d19d4a2e9eb0ce3606eb48'
+      decimals: 6
+    - symbol: USDT
+      address: '0xdac17f958d2ee523a2206206994597c13d831ec7'
+      decimals: 6
+    - symbol: WBTC
+      address: '0x2260fac5e5542a773aa44fbcfedf7c193bc2c599'
+      decimals: 8
+    - symbol: WETH
+      address: '0xc02aaa39b223fe8d0a0e5c4f27ead9083c756cc2'
+      decimals: 18
+    - symbol: stETH
+      address: '0xae7ab96520de3a18e5e111b5eaab095312d7fe84'
+      decimals: 18
+    source: Aave V2 Ethereum ProtocolDataProvider; reserve token addresses are discovered on-chain before state extraction
+  lido_steth:
+    protocol: lido
+    role: staking
+    address: '0xae7ab96520de3a18e5e111b5eaab095312d7fe84'
+    state_kind: lido_steth
+    asset: stETH
+    source: Lido stETH
+    decoded_event_signatures:
+    - Submitted(address,uint256,address)
+    - ETHDistributed(uint256,uint256,uint256,uint256,uint256,uint256)
+    - TokenRebased(uint256,uint256,uint256,uint256,uint256,uint256,uint256)
+    - ELRewardsReceived(uint256)
+    - WithdrawalsReceived(uint256)
+    - TransferShares(address,address,uint256)
+    - SharesBurnt(address,uint256,uint256,uint256)
+  lido_wsteth:
+    protocol: lido
+    role: wrapper
+    address: '0x7f39c581f595b53c5cb19bd0b3f8da6c935e2ca0'
+    state_kind: lido_wsteth
+    asset: wstETH
+    source: Lido wstETH
+  lido_withdrawal_queue:
+    protocol: lido
+    role: withdrawal_queue
+    address: '0x889edc2edab5f40e902b864ad4d7ade8e412f9b1'
+    state_kind: lido_withdrawal_queue
+    active_from: '2023-05-15T16:00:00Z'
+    source: Lido WithdrawalQueueERC721 mainnet proxy
+    decoded_event_signatures:
+    - WithdrawalRequested(uint256,address,address,uint256,uint256)
+    - WithdrawalsFinalized(uint256,uint256,uint256,uint256,uint256)
+    - WithdrawalClaimed(uint256,address,address,uint256)
+  chainlink_eth_usd:
+    protocol: chainlink
+    role: oracle
+    address: '0x5f4ec3df9cbd43714fe2740f5e3616155c5b8419'
+    state_kind: chainlink_feed
+    asset: ETH/USD
+    decimals: 8
+  chainlink_btc_usd:
+    protocol: chainlink
+    role: oracle
+    address: '0xf4030086522a5beea4988f8ca5b36dbc97bee88c'
+    state_kind: chainlink_feed
+    asset: BTC/USD
+    decimals: 8
+token_activity:
+  USDC:
+    mode: mint_burn_only
+  USDT:
+    mode: mint_burn_only
+  DAI:
+    mode: mint_burn_only
+  FRAX:
+    mode: mint_burn_only
+  LUSD:
+    mode: mint_burn_only
+  WBTC:
+    mode: all
+  wstETH:
+    mode: all

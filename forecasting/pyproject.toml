@@ -1,0 +1,31 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "assetguardx-forecasting"
+version = "0.1.0"
+description = "Leakage-safe temporal graph attention forecasting for AssetGuard-X"
+requires-python = ">=3.11"
+dependencies = [
+    "assetguardx-graph-modelling==0.1.0",
+    "numpy>=1.26,<3",
+    "polars>=1,<2",
+    "PyYAML>=6,<7",
+    "scikit-learn>=1.4,<2",
+    "torch>=2.2,<3",
+]
+
+[project.optional-dependencies]
+dev = ["pytest>=8,<9", "ruff>=0.9"]
+
+[project.scripts]
+assetguardx-forecast = "assetguardx_forecasting.cli:main"
+
+[tool.setuptools.packages.find]
+include = ["assetguardx_forecasting*"]
+
+[tool.pytest.ini_options]
+pythonpath = [".", "../graph_modelling"]
+testpaths = ["tests"]
+addopts = "-q -p no:cacheprovider"

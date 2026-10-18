@@ -1,0 +1,14 @@
+# Labels are intentionally calculated AFTER the raw archive is frozen.
+# Fill thresholds only after the thesis label definition is approved.
+# Example structure (values deliberately null, not invented):
+thresholds:
+  USDC: null
+  USDT: null
+  DAI: null
+  FRAX: null
+  LUSD: null
+  stETH: null
+  wstETH: null
+  WBTC: null
+horizons_hours: [6, 12, 24]
+recovery_tolerance: null

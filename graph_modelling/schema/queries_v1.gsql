@@ -1,0 +1,15 @@
+USE GRAPH AssetGuardX
+
+// Availability is separate from event time. Return all eligible versions;
+// canonical Python reduction selects the newest before evaluating expiry.
+CREATE QUERY agx_records_v1(STRING release_id, STRING release_hash, INT as_of_epoch)
+FOR GRAPH AssetGuardX SYNTAX v2 {
+  Records = {AGXRecord.*};
+  Releases = {AGXRelease.*};
+  SelectedRecords = SELECT r FROM Records:r
+    WHERE r.release_hash == release_hash
+      AND r.observed_epoch <= as_of_epoch AND r.available_epoch <= as_of_epoch;
+  SelectedReleases = SELECT m FROM Releases:m WHERE m.release_id == release_id;
+  PRINT SelectedRecords AS records, SelectedReleases AS releases;
+}
+INSTALL QUERY agx_records_v1

@@ -1,0 +1,71 @@
+project_id: assetguardx-iitm-2026
+location: US
+
+study_window:
+  start: '2022-01-01T00:00:00Z'
+  core_end_exclusive: '2024-01-01T00:00:00Z'
+  validation_end_exclusive: '2024-04-01T00:00:00Z'
+  description: 'Core study = calendar year 2022; forward temporal holdout = Jan-Mar 2024.'
+
+bigquery:
+  decoded_events_table: 'bigquery-public-data.blockchain_analytics_ethereum_mainnet_us.decoded_events'
+  token_transfers_table: 'bigquery-public-data.goog_blockchain_ethereum_mainnet_us.token_transfers'
+  blocks_table: 'bigquery-public-data.blockchain_analytics_ethereum_mainnet_us.blocks'
+  raw_logs_table: 'bigquery-public-data.blockchain_analytics_ethereum_mainnet_us.logs'
+  # Only contracts whose decoded-event coverage was missing in the EDA audit.
+  # Keep all topic/data fields, including topic0 values not recognized yet.
+  raw_log_contracts:
+    - aave_v2_lending_pool
+    - curve_3pool
+    - curve_frax_usdc
+    - curve_lusd_3crv
+    - curve_steth_eth
+    - lido_steth
+    - lido_withdrawal_queue
+  page_size: 10000
+  raw_protocol_logs_page_size: 5000
+  maximum_bytes_billed:
+    protocol_events: 26843545600      # 25 GiB/month guard
+    token_activity_events: 32212254720 # 30 GiB/month guard
+    hourly_blocks: 5368709120         # 5 GiB/month guard
+    raw_protocol_logs: 10737418240    # 10 GiB per query guard
+
+storage:
+  mode: google_drive_mounted_with_local_staging
+  drive_root_env: ASSETGUARDX_DRIVE_ROOT
+  auto_detect_windows: true
+  require_drive_for_execute: true
+  project_subdir: 'AssetGuardX_IITM/thesis_2023_Q1_2024_raw_v2_1'
+  scratch_root_env: ASSETGUARDX_SCRATCH_ROOT
+  scratch_default_windows: '%LOCALAPPDATA%\\AssetGuardX\\scratch'
+  delete_scratch_after_verified_copy: true
+  copy_retries: 8
+  copy_retry_seconds: 3
+  note: >-
+    Parquet is written and closed on the local scratch drive first, then copied to Google Drive.
+    This avoids long PyArrow writes directly to DriveFS, which caused WinError 1450.
+
+output:
+  raw_subdir: 'raw'
+  processed_subdir: 'processed'
+  manifest: 'manifests/extraction_manifest.jsonl'
+  format: parquet
+  compression: zstd
+  checksum_sha256: true
+  deep_remote_checksum_on_copy: false
+
+rpc:
+  env_var: ASSETGUARDX_ETH_RPC_URL
+  request_timeout_seconds: 90
+  max_retries: 6
+  batch_size: 40
+  pause_between_batches_seconds: 0.05
+  hourly_state_enabled: true
+
+policies:
+  default_mode: dry-run
+  require_execute_flag: true
+  overwrite_existing: false
+  raw_logs_fallback: true
+  raw_first: true
+  no_bigquery_after_raw_freeze: true

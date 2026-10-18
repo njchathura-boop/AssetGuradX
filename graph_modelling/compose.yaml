@@ -1,0 +1,22 @@
+name: assetguardx-graph
+services:
+  tigergraph:
+    # TigerGraph Community Edition 4.2.5, pinned to the verified Docker Hub digest.
+    image: tigergraph/community@sha256:190c505bf5c22c90e597b901ea8fcfaf2da7e883b688d7d48c8fe60af0a20ddb
+    container_name: assetguardx-tigergraph
+    tty: true
+    restart: "no"
+    cpus: 4
+    mem_limit: 8g
+    ports:
+      - "127.0.0.1:14240:14240"
+      - "127.0.0.1:19000:9000"
+    ulimits:
+      nofile:
+        soft: 1000000
+        hard: 1000000
+    volumes:
+      - assetguardx-tigergraph-data:/home/tigergraph
+      - ./schema:/home/tigergraph/mydata/schema:ro
+volumes:
+  assetguardx-tigergraph-data:

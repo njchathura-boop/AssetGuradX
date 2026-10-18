@@ -1,0 +1,26 @@
+schema_version: assetguardx-quote-sensitivity/v1
+chain_id: 1
+
+# Official Uniswap Labs Ethereum deployment list. Quotes use eth_call at each
+# historical block; no transaction is sent and no chain state is changed.
+uniswap_v3_quoter_v2:
+  address: '0x61fFE014bA17989E743c5F6cB21bF9697530B21e'
+  source: 'https://developers.uniswap.org/docs/protocols/v3/deployments/v3-ethereum-deployments'
+  method: quoteExactInputSingle
+  signature: 'quoteExactInputSingle((address,address,uint256,uint24,uint160))'
+
+# Exact-input amounts are denominated in the input asset, not USD. Multiple
+# sizes reveal pool slippage/depth; they are not actual executed trades.
+input_amounts:
+  stablecoin: ['1', '1000', '100000', '1000000']
+  lst: ['0.01', '0.1', '1', '10']
+  wrapped: ['0.001', '0.01', '0.1', '1']
+  support: ['0.01', '0.1', '1', '10']
+
+sampling:
+  every_hours: 6
+  max_quote_calls_per_release: 150000
+
+storage:
+  path: 'supplemental/quote_sensitivity'
+  manifest: 'metadata/supplemental_quote_sensitivity.jsonl'

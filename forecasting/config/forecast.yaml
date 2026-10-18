@@ -1,0 +1,27 @@
+schema_version: assetguardx-forecast-design/v1
+# Research design defaults from the thesis plan. Mentor review and independent
+# price reconciliation are still required before this becomes a final release.
+status: provisional
+assets: [USDC, USDT, DAI, FRAX, LUSD, stETH, wstETH, WBTC]
+horizons_hours: [6, 12, 24]
+thresholds:
+  USDC: 0.005
+  USDT: 0.005
+  DAI: 0.005
+  FRAX: 0.005
+  LUSD: 0.005
+  stETH: 0.01
+  wstETH: 0.01
+  WBTC: 0.005
+sustained_hours: 2
+recovery_hours: 3
+recovery_threshold_fraction: 0.5
+maximum_market_price_age_hours: 0
+# Freeze feature/type vocabulary before examining validation or test outcomes.
+schema_until: '2023-09-01T00:00:00Z'
+splits:
+  start: '2023-01-01T00:00:00Z'
+  train_end: '2023-09-01T00:00:00Z'
+  calibration_start: '2023-11-01T00:00:00Z'
+  validation_end: '2024-01-01T00:00:00Z'
+  test_end: '2024-04-01T00:00:00Z'

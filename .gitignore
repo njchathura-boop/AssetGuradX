@@ -1,0 +1,27 @@
+# Nested clone; use FINAL_YEAR_PROJECT as the repository root
+/AssetGuradX/
+
+# Python environments and caches
+**/.venv/
+**/__pycache__/
+**/.pytest_cache/
+/.ruff_cache/
+
+# Credentials and local secrets
+.env
+.env.*
+**/application_default_credentials.json
+**/service-account*.json
+
+# Downloaded/generated data and graph artifacts
+*.parquet
+*.npz
+**/cached_snapshots/
+**/tigergraph-data/
+
+# Temporary Office and editor files
+~$*
+*.tmp
+
+# Research papers and recordings: keep local unless you have permission to share
+/PREP

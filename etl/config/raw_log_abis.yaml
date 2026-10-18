@@ -1,0 +1,241 @@
+schema_version: assetguardx-raw-log-abis/v1
+decoder_version: 1.0.4
+description: >-
+  Event layouts used to decode the selected raw Ethereum logs. Indexed positions are
+  zero-based argument positions. Layouts are restricted to the selected contracts
+  and are checked against each contract's configured or supplemental event signatures.
+provenance:
+  aave_v2: https://github.com/aave/protocol-v2/blob/master/contracts/interfaces/ILendingPool.sol
+  curve: https://github.com/curvefi/curve-contract/tree/master/contracts/pools
+  lido: https://github.com/lidofinance/core
+  lido_withdrawal_metadata: https://github.com/lidofinance/core/blob/master/contracts/0.8.9/WithdrawalQueueERC721.sol
+  curve_steth: https://github.com/curvefi/curve-contract/blob/master/contracts/pools/steth/StableSwapSTETH.vy
+  aave_pool_proxy: https://github.com/aave/protocol-v2
+events:
+  'Transfer(address,address,uint256)':
+    names: [from, to, value]
+    indexed: [0, 1]
+    family: token_transfer
+  'Approval(address,address,uint256)':
+    names: [owner, spender, value]
+    indexed: [0, 1]
+    family: token_approval
+  'ApprovalForAll(address,address,bool)':
+    names: [owner, operator, approved]
+    indexed: [0, 1]
+    family: token_approval
+  'TokenExchange(address,int128,uint256,int128,uint256)':
+    names: [buyer, sold_id, tokens_sold, bought_id, tokens_bought]
+    indexed: [0]
+    family: dex_swap
+  'TokenExchangeUnderlying(address,int128,uint256,int128,uint256)':
+    names: [buyer, sold_id, tokens_sold, bought_id, tokens_bought]
+    indexed: [0]
+    family: dex_swap
+  'AddLiquidity(address,uint256[3],uint256[3],uint256,uint256)':
+    names: [provider, token_amounts, fees, invariant, token_supply]
+    indexed: [0]
+    family: dex_liquidity
+  'AddLiquidity(address,uint256[2],uint256[2],uint256,uint256)':
+    names: [provider, token_amounts, fees, invariant, token_supply]
+    indexed: [0]
+    family: dex_liquidity
+  'RemoveLiquidity(address,uint256[3],uint256[3],uint256)':
+    names: [provider, token_amounts, fees, token_supply]
+    indexed: [0]
+    family: dex_liquidity
+  'RemoveLiquidity(address,uint256[2],uint256[2],uint256)':
+    names: [provider, token_amounts, fees, token_supply]
+    indexed: [0]
+    family: dex_liquidity
+  'RemoveLiquidityOne(address,uint256,uint256)':
+    names: [provider, token_amount, coin_amount]
+    indexed: [0]
+    family: dex_liquidity
+  'RemoveLiquidityOne(address,uint256,uint256,uint256)':
+    names: [provider, token_amount, coin_amount, token_supply]
+    indexed: [0]
+    family: dex_liquidity
+  'RemoveLiquidityImbalance(address,uint256[3],uint256[3],uint256,uint256)':
+    names: [provider, token_amounts, fees, invariant, token_supply]
+    indexed: [0]
+    family: dex_liquidity
+  'RemoveLiquidityImbalance(address,uint256[2],uint256[2],uint256,uint256)':
+    names: [provider, token_amounts, fees, invariant, token_supply]
+    indexed: [0]
+    family: dex_liquidity
+  'RampA(uint256,uint256,uint256,uint256)':
+    names: [old_a, new_a, initial_time, future_time]
+    indexed: []
+    family: dex_parameter
+  'StopRampA(uint256,uint256)':
+    names: [current_a, timestamp]
+    indexed: []
+    family: dex_parameter
+  'NewFee(uint256,uint256)':
+    names: [fee, admin_fee]
+    indexed: []
+    family: dex_parameter
+  'Deposit(address,address,address,uint256,uint16)':
+    names: [reserve, user, onBehalfOf, amount, referral]
+    indexed: [0, 2, 4]
+    family: lending
+  'Withdraw(address,address,address,uint256)':
+    names: [reserve, user, to, amount]
+    indexed: [0, 1, 2]
+    family: lending
+  'Borrow(address,address,address,uint256,uint256,uint256,uint16)':
+    names: [reserve, user, onBehalfOf, amount, borrowRateMode, borrowRate, referral]
+    indexed: [0, 2, 6]
+    family: lending
+  'Repay(address,address,address,uint256)':
+    names: [reserve, user, repayer, amount]
+    indexed: [0, 1, 2]
+    family: lending
+  'LiquidationCall(address,address,address,uint256,uint256,address,bool)':
+    names: [collateralAsset, debtAsset, user, debtToCover, liquidatedCollateralAmount, liquidator, receiveAToken]
+    indexed: [0, 1, 2]
+    family: lending
+  'ReserveDataUpdated(address,uint256,uint256,uint256,uint256,uint256)':
+    names: [reserve, liquidityRate, stableBorrowRate, variableBorrowRate, liquidityIndex, variableBorrowIndex]
+    indexed: [0]
+    family: lending
+  'ReserveUsedAsCollateralEnabled(address,address)':
+    names: [reserve, user]
+    indexed: [0, 1]
+    family: lending
+  'ReserveUsedAsCollateralDisabled(address,address)':
+    names: [reserve, user]
+    indexed: [0, 1]
+    family: lending
+  'Swap(address,address,uint256)':
+    names: [reserve, user, rateMode]
+    indexed: [0, 1]
+    family: lending
+  'RebalanceStableBorrowRate(address,address)':
+    names: [reserve, user]
+    indexed: [0, 1]
+    family: lending
+  'FlashLoan(address,address,address,uint256,uint256,uint16)':
+    names: [target, initiator, reserve, amount, premium, referralCode]
+    indexed: [0, 1, 2]
+    family: lending
+  'Submitted(address,uint256,address)':
+    names: [sender, amount, referral]
+    indexed: [0]
+    family: staking
+  'ETHDistributed(uint256,uint256,uint256,uint256,uint256,uint256)':
+    names: [reportTimestamp, preCLBalance, postCLBalance, withdrawalsWithdrawn, executionLayerRewardsWithdrawn, postBufferedEther]
+    indexed: [0]
+    family: staking
+  'TokenRebased(uint256,uint256,uint256,uint256,uint256,uint256,uint256)':
+    names: [reportTimestamp, timeElapsed, preTotalShares, preTotalEther, postTotalShares, postTotalEther, sharesMintedAsFees]
+    indexed: [0]
+    family: staking
+  'ELRewardsReceived(uint256)':
+    names: [amount]
+    indexed: []
+    family: staking
+  'WithdrawalsReceived(uint256)':
+    names: [amount]
+    indexed: []
+    family: staking
+  'TransferShares(address,address,uint256)':
+    names: [from, to, sharesValue]
+    indexed: [0, 1]
+    family: staking
+  'SharesBurnt(address,uint256,uint256,uint256)':
+    names: [account, preRebaseTokenAmount, postRebaseTokenAmount, sharesAmount]
+    indexed: [0]
+    family: staking
+  'WithdrawalRequested(uint256,address,address,uint256,uint256)':
+    names: [requestId, requestor, owner, amountOfStETH, amountOfShares]
+    indexed: [0, 1, 2]
+    family: withdrawal
+  'WithdrawalsFinalized(uint256,uint256,uint256,uint256,uint256)':
+    names: [fromRequestId, toRequestId, amountOfETHLocked, sharesToBurn, timestamp]
+    indexed: [0, 1]
+    family: withdrawal
+  'WithdrawalClaimed(uint256,address,address,uint256)':
+    names: [requestId, owner, receiver, amountOfETH]
+    indexed: [0, 1, 2]
+    family: withdrawal
+  'Unbuffered(uint256)':
+    names: [amount]
+    indexed: []
+    family: staking
+  'DepositedValidatorsChanged(uint256)':
+    names: [depositedValidators]
+    indexed: []
+    family: staking
+  'CLValidatorsUpdated(uint256,uint256,uint256)':
+    names: [reportTimestamp, preCLValidators, postCLValidators]
+    indexed: [0]
+    family: staking
+  'BatchMetadataUpdate(uint256,uint256)':
+    names: [fromTokenId, toTokenId]
+    indexed: []
+    family: withdrawal_metadata
+  'TokensRescued(address,address,uint256)':
+    names: [token, to, amount]
+    indexed: [0, 1]
+    family: lending_administration
+  'ContractVersionSet(uint256)':
+    names: [version]
+    indexed: []
+    family: staking_administration
+  'Paused()':
+    names: []
+    indexed: []
+    family: lending_administration
+  'Unpaused()':
+    names: []
+    indexed: []
+    family: lending_administration
+  'EIP712StETHInitialized(address)':
+    names: [eip712StETH]
+    indexed: []
+    family: staking_administration
+  'LidoLocatorSet(address)':
+    names: [lidoLocator]
+    indexed: []
+    family: staking_administration
+  'CommitNewFee(uint256,uint256,uint256)':
+    names: [deadline, fee, admin_fee]
+    indexed: [0]
+    family: dex_parameter
+  'Upgraded(address)':
+    names: [implementation]
+    indexed: [0]
+    family: lending_administration
+supplemental_contract_events:
+  # Observed in the immutable archive; not prerequisites for coverage.
+  lido_steth:
+    - 'Unbuffered(uint256)'
+    - 'DepositedValidatorsChanged(uint256)'
+    - 'CLValidatorsUpdated(uint256,uint256,uint256)'
+    - 'ContractVersionSet(uint256)'
+    - 'EIP712StETHInitialized(address)'
+    - 'LidoLocatorSet(address)'
+  lido_withdrawal_queue:
+    - 'BatchMetadataUpdate(uint256,uint256)'
+  aave_v2_lending_pool:
+    - 'TokensRescued(address,address,uint256)'
+    - 'Paused()'
+    - 'Unpaused()'
+    - 'Upgraded(address)'
+  curve_steth_eth:
+    - 'CommitNewFee(uint256,uint256,uint256)'
+# Decoder 1.0.3 stored incorrect field names for this observed event.
+redecode_archived_signatures:
+  - 'NewFee(uint256,uint256)'
+contract_overrides:
+  lido_withdrawal_queue:
+    'Transfer(address,address,uint256)':
+      names: [from, to, tokenId]
+      indexed: [0, 1, 2]
+      family: withdrawal_nft_transfer
+    'Approval(address,address,uint256)':
+      names: [owner, approved, tokenId]
+      indexed: [0, 1, 2]
+      family: withdrawal_nft_approval

@@ -1,0 +1,12 @@
+// Install on a fresh, local Community database. No DROP or destructive migration.
+CREATE VERTEX AGXEntity (PRIMARY_ID id STRING, entity_id STRING, kind STRING,
+                        name STRING, release_hash STRING) WITH primary_id_as_attribute="true"
+CREATE VERTEX AGXRecord (PRIMARY_ID id STRING, record_id STRING, release_hash STRING,
+                        observed_epoch INT, available_epoch INT, payload_json STRING)
+                        WITH primary_id_as_attribute="true"
+CREATE VERTEX AGXRelease (PRIMARY_ID id STRING, release_id STRING, content_hash STRING,
+                         start_epoch INT, end_epoch INT, record_count INT)
+                         WITH primary_id_as_attribute="true"
+CREATE DIRECTED EDGE AGX_SOURCE (FROM AGXRecord, TO AGXEntity)
+CREATE DIRECTED EDGE AGX_TARGET (FROM AGXRecord, TO AGXEntity)
+CREATE GRAPH AssetGuardX (AGXEntity, AGXRecord, AGXRelease, AGX_SOURCE, AGX_TARGET)

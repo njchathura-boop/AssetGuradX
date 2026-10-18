@@ -1,0 +1,19 @@
+schema_version: assetguardx-graph-config/v1
+backend: tigergraph_community
+graph_name: AssetGuardX
+restpp_url: http://localhost:14240/restpp
+token_environment_variable: ASSETGUARDX_TIGERGRAPH_TOKEN
+endpoint_environment_variable: ASSETGUARDX_TIGERGRAPH_URL
+remote_opt_in_environment_variable: ASSETGUARDX_TIGERGRAPH_ALLOW_REMOTE
+schema_file: schema/schema_v1.gsql
+query_file: schema/queries_v1.gsql
+live_database_location: local_or_cloud_not_streamed_drive
+immutable_exports: google_drive
+pilot_days: 7
+working_window_days: 30
+preceding_context_days: 7
+neighbourhood_hops: 2
+maximum_impact_hops: 3
+views: [correlation, exposure, mstg]
+missing_window_policy: error_not_empty_graph
+training_inputs: tigergraph_verified_versioned_exports
